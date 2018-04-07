@@ -1,0 +1,103 @@
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Vue App</title>
+  <style>
+    h2{
+      margin-top: 30px;
+      border-bottom: 1px solid #eee;
+      width: 100%;
+    }
+
+    .message{
+      color: red;
+    }
+
+    .done{
+      color: #eee;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>v-model</h2>
+  <div class="helloVue">
+    <p>Hello {{name.toUpperCase()}} !</p>
+    <p><input type="text" v-model="name"></p>
+  </div>
+
+
+  <h2>v-for, v-on, v-bind</h2>
+  <div class="toDo">
+    <ul>
+      <li v-for="(value, index) in todos">
+        <input type="checkbox" v-model="value.isDone">
+        <span v-bind:class="{done: value.isDone}">{{value.title}}</span>
+        <span v-on:click="deleteToDo(index)">[x]</span>
+      </li>
+    </ul>
+    <form v-on:submit.prevent="addToDo">
+      <input type="text" v-model="newTodo">
+      <input type="submit" value="Add w/submit">
+      <input type="button" value="Add w/click" v-on:click="addToDo">
+    </form>
+    <p class="message">{{message}}</p>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+  'use strict';
+
+  var helloVue = new Vue({
+    el: '.helloVue',
+    data: {
+      name: 'uuuno'
+    }
+  });
+
+  var toDo = new Vue({
+    el: '.toDo',
+    data: {
+      newTodo: '',
+      message: '',
+      todos: [
+        {
+          title: 'buy egg',
+          isDone: false
+        },
+        {
+          title: 'stydy Vue.js',
+          isDone: false
+        },
+        {
+          title: 'go fishing',
+          isDone: true
+        }
+      ]
+    },
+    methods:{
+      addToDo: function(){
+        this.message = "";
+        if(this.newTodo != ''){
+          var value = {
+            title: this.newTodo,
+            isDone: false
+          }
+          this.todos.push(value);
+          this.newTodo = '';
+        }else{
+          this.message = "ToDo is Empty!";
+        }
+      },
+      deleteToDo: function(index){
+        this.todos.splice(index, 1);
+      }
+    }
+  });
+
+  </script>
+
+</body>
+</html>
