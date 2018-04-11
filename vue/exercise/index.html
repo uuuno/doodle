@@ -45,59 +45,28 @@
     <p class="message">{{message}}</p>
   </div>
 
+  <h2>v-show, v-if</h2>
+  <div class="checkName">
+    <p v-show="myName.length == 0">Please input your name.</p>
+    <p v-show="myName.length != 0">{{ myName }}</p>
+
+    <p v-if="myName.length <= 15">{{ myName.length }}文字</p>
+    <p v-else-if="myName.length <= 20">{{ myName.length }}文字とは長いねー</p>
+    <p v-else>さすがに{{ myName.length }}文字は長すぎますね。。</p>
+    Your Name is <input type="text" v-model="myName">
+  </div>
+
+  <h2>computed</h2>
+  <div class="computed">
+    <p v-if="height == '' || weight == ''">Please input your Height&Weight to culculate BMI.</p>
+    <p v-else>{{bmi}}</p>
+    Height : <input type="text" v-model="height"><br>
+    Weight : <input type="text" v-model="weight">
+  </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-  <script>
-  'use strict';
-
-  var helloVue = new Vue({
-    el: '.helloVue',
-    data: {
-      name: 'uuuno'
-    }
-  });
-
-  var toDo = new Vue({
-    el: '.toDo',
-    data: {
-      newTodo: '',
-      message: '',
-      todos: [
-        {
-          title: 'buy egg',
-          isDone: false
-        },
-        {
-          title: 'stydy Vue.js',
-          isDone: false
-        },
-        {
-          title: 'go fishing',
-          isDone: true
-        }
-      ]
-    },
-    methods:{
-      addToDo: function(){
-        this.message = "";
-        if(this.newTodo != ''){
-          var value = {
-            title: this.newTodo,
-            isDone: false
-          }
-          this.todos.push(value);
-          this.newTodo = '';
-        }else{
-          this.message = "ToDo is Empty!";
-        }
-      },
-      deleteToDo: function(index){
-        this.todos.splice(index, 1);
-      }
-    }
-  });
-
-  </script>
+  <script src="./main.js"></script>
 
 </body>
 </html>
