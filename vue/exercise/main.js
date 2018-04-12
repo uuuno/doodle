@@ -73,3 +73,37 @@ var computed = new Vue({
     }
   }
 });
+
+
+var watch = new Vue({
+  el: '.watch',
+  data: {
+    message:  "",
+    nowTime:  0,
+    fruits: [
+      'apple',
+      'kiwi',
+      'orange',
+      'strawberry',
+      'melon'
+    ]
+  },
+  methods: {
+    addFruits: function(){
+      setInterval(function(){
+        if(watch.fruits.length < 20){
+          watch.fruits.push('hey');
+        }
+        watch.nowTime++;
+      }, 1000);
+      this.fruits.push('hey')
+    }
+  },
+  watch: {
+    fruits: function(){
+      if(this.fruits.length%10 == 0){
+        this.message = 'アイテムが' + this.fruits.length + '個になりました。'
+      }
+    }
+  }
+});
