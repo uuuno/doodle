@@ -91,11 +91,11 @@ var watch = new Vue({
   methods: {
     addFruits: function(){
       setInterval(function(){
-        if(watch.fruits.length < 20){
+        if(watch.fruits.length < 100){
           watch.fruits.push('hey');
         }
         watch.nowTime++;
-      }, 1000);
+      }, 300);
       this.fruits.push('hey')
     }
   },
@@ -103,7 +103,57 @@ var watch = new Vue({
     fruits: function(){
       if(this.fruits.length%10 == 0){
         this.message = 'アイテムが' + this.fruits.length + '個になりました。'
+      }else{
+        this.message = ""
       }
     }
+  }
+
+});
+
+var vFb = Vue.extend({
+  // props: ['msg1', 'msg2'],
+  props: {
+    msg1:{
+      type: String,
+      default: 'Like'
+    },
+    msg2:{
+      type: String,
+      default: 'Dislike'
+    }
+  },
+  data: function(){
+    return {
+        likeCount: 0,
+        dislikeCount: 0
+    }
+  },
+  template: '<div><div v-show="likeCount > dislikeCount">{{msg1}}優勢!!!</div><div v-show="likeCount == dislikeCount">現在、同数です！</div><div v-show="likeCount < dislikeCount">{{msg2}}優勢...</div><button v-on:click="conuntUp">{{msg1}} {{likeCount}}</button><button v-on:click="countDown">{{msg2}}{{dislikeCount}}</button></div>',
+  methods: {
+    conuntUp: function(){
+      this.likeCount++;
+      this.$emit('incre');
+    },
+    countDown: function(){
+      this.dislikeCount++;
+      this.$emit('incre');
+    }
+  }
+});
+
+
+var components = new Vue({
+  el: '.components',
+  data:{
+    totalCount: 0
+  },
+  methods:{
+    increTotal: function(){
+      this.totalCount++;
+    }
+  },
+  components: {
+    'v-fb': vFb
   }
 });

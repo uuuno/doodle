@@ -74,6 +74,13 @@
     </ul>
   </div>
 
+  <h2>component, props</h2>
+  <div class="components">
+    <p>Total FB: {{totalCount}}</p>
+    <v-fb v-on:incre="increTotal"></v-fb>
+    <v-fb msg1='Go!' msg2='Stop!' v-on:incre="increTotal"></v-fb>
+  </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="./main.js"></script>
