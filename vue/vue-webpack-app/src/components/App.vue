@@ -7,16 +7,10 @@
 </template>
 
 <script>
-import Counter from "./Counter"
-import Avatar from "vue-avatar"
+import Counter from './Counter'
+import Avatar from 'vue-avatar'
 
-export default{
-       components: {Counter, Avatar},
+ export default {
+     components: {Counter, Avatar},
 }
 </script>
-
-<style>
-p{
-	font-size: 20px;
-}
-</style>

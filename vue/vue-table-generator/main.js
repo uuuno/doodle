@@ -12,7 +12,9 @@ var vTable = Vue.extend({
   },
   template: `
   <div>
-    <button v-on:click="add_row()">Row+</button>
+    <button v-on:click="rm_row()">Row-</button>
+    <button v-on:click="add_row()">Row+</button><br>
+    <button v-on:click="rm_col()">Col-</button>
     <button v-on:click="add_col()">Col+</button>
     {{ num_rows }}, {{ num_cols }}
     <table>
@@ -33,6 +35,18 @@ var vTable = Vue.extend({
     add_col: function(){
       for (var i = 0; i < this.num_rows; i++) {
         this.table[i].push(1);
+      }
+    },
+    rm_row: function(){
+      if (this.num_rows > 1) {
+        this.table.pop();
+      }
+    },
+    rm_col: function() {
+      if (this.num_cols > 1) {
+        for (var i = 0; i < this.num_rows; i++) {
+          this.table[i].pop();
+        }
       }
     }
   },

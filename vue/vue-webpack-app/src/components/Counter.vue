@@ -1,7 +1,17 @@
 <template>
     <div>
         <button>-</button>
-        <span>0</span>
+        <span>{{count}}</span>
         <button>+</button>
     </div>
 </template>
+
+<script>
+export default{
+       data(){
+       return {
+       count: 0,
+       }
+       }
+}
+</script>
