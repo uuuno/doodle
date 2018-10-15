@@ -20,13 +20,20 @@ var vTable = Vue.extend({
     <br><br>Rows: {{ num_rows }}<br>
     Cols: {{ num_cols }}
     <table>
+      <tr>
+        <td></td>
+        <td v-for="(col, col_index) in table[0]">
+          a{{col_index+1}}
+        </td>
+      </tr>
       <tr v-for="(row, row_index) in table">
+        <td>r{{row_index+1}}</td>
         <td v-for="(col, col_index) in row">
-          <input v-model="table[row_index][col_index]" v-on:keyup.enter="visible=false" v-on:blur="visible=false" ref="r1"/>
+          <input v-model="table[row_index][col_index]"/>
         </td>
       </tr>
     </table>
-
+    <button v-on:click="add_row()">Row+</button>
     <div class="res_md">
       <div v-for="(row, row_index) in table">
         <div v-if="row_index==0">
@@ -38,7 +45,6 @@ var vTable = Vue.extend({
         </div>
       </div>
     </div>
-
     <div class="res_html">
       <div>&lt;table&gt;</div>
       <div v-for="(row, row_index) in table">
@@ -49,9 +55,8 @@ var vTable = Vue.extend({
         &lt;tr&gt;<span v-for="col in row">&lt;td&gt; {{col}} &lt;/td&gt;</span>&lt;/tr&gt;
         </div>
       </div>
-      <div>&lt;/table&gt;</div>  
+      <div>&lt;/table&gt;</div>
     </div>
-
   </div>
   `,
   methods: {
@@ -77,6 +82,7 @@ var vTable = Vue.extend({
         for (var i = 0; i < this.num_rows; i++) {
           this.table[i].pop();
         }
+      }
     }
   },
   computed: {
