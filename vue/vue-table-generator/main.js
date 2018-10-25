@@ -12,29 +12,34 @@ var vTable = Vue.extend({
     }
   },
   template: `
-  <div>
-    <button v-on:click="rm_row()">Row-</button>
-    <button v-on:click="add_row()">Row+</button><br>
-    <button v-on:click="rm_col()">Col-</button>
-    <button v-on:click="add_col()">Col+</button>
-    <br><br>Rows: {{ num_rows }}<br>
-    Cols: {{ num_cols }}
+  <div class="wrap">
+    <div class="setting">
+      <button v-on:click="rm_row()">Row-</button>
+      {{ num_rows }}
+      <button v-on:click="add_row()">Row+</button>
+
+      <button v-on:click="rm_col()">Col-</button>
+      {{ num_cols }}
+      <button v-on:click="add_col()">Col+</button>
+    </div>
+
     <table>
       <tr>
         <td></td>
-        <td v-for="(col, col_index) in table[0]">
-          a{{col_index+1}}
+        <td class="row-number" v-for="(col, col_index) in table[0]">
+          c{{col_index+1}}
         </td>
       </tr>
       <tr v-for="(row, row_index) in table">
-        <td>r{{row_index+1}}</td>
+        <td class="col-number" >r{{row_index+1}}</td>
         <td v-for="(col, col_index) in row">
-          <input v-model="table[row_index][col_index]"/>
+          <input class="cell" v-model="table[row_index][col_index]"/>
         </td>
       </tr>
     </table>
     <button v-on:click="add_row()">Row+</button>
-    <div class="res_md">
+
+    <div class="res-md">
       <div v-for="(row, row_index) in table">
         <div v-if="row_index==0">
           | <span v-for="col in row"> {{col}} |</span><br>
@@ -45,7 +50,8 @@ var vTable = Vue.extend({
         </div>
       </div>
     </div>
-    <div class="res_html">
+
+    <div class="res-html">
       <div>&lt;table&gt;</div>
       <div v-for="(row, row_index) in table">
         <div v-if="row_index==0">
@@ -57,6 +63,7 @@ var vTable = Vue.extend({
       </div>
       <div>&lt;/table&gt;</div>
     </div>
+
   </div>
   `,
   methods: {
